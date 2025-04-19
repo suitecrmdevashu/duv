@@ -96,8 +96,8 @@
 
 
 
-            <li class="nav-item @if (Session::get('active') == 'marquee' || Session::get('active') == 'banner') menu-is-opening menu-open @endif">
-                <a href="#" class="nav-link @if (Session::get('active') == 'marquee' || Session::get('active') == 'banner') menu-is-opening menu-open @endif">
+            <li class="nav-item @if (Session::get('active') == 'marquee' || Session::get('active') == 'banner' || Session::get('active') == 'facility' ) menu-is-opening menu-open @endif">
+                <a href="#" class="nav-link @if (Session::get('active') == 'marquee' || Session::get('active') == 'facility' || Session::get('active') == 'banner') menu-is-opening menu-open @endif">
                     <i class="nav-icon fas fa-list"></i>
                     <p>
                         Home Page
@@ -130,7 +130,7 @@
 
                     @can('create_facilities')
                         <li class="nav-item">
-                            <a href="/admin/facilities" class="nav-link @if (Session::get('active') == 'facilities') active @endif">
+                            <a href="/admin/facilities" class="nav-link @if (Session::get('active') == 'facility') active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                   Facilities
