@@ -27,6 +27,9 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\Notifications;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\VisionMissionController;
+use App\Http\Controllers\Frontend\IndexController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,9 +47,10 @@ Route::get('/clear-cache', function () {
     return 'Cache is cleared';
 });
 
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('home');
+Route::get('/', [IndexController::class, 'index'])->name('home');
+// {
+//     return view('frontend.index');
+// })->name('home');
 Route::get('/about-school', [HomeController::class, 'aboutschool'])->name('aboutschool');
 Route::get('/vision&mission', [HomeController::class, 'visionmission'])->name('visionmission');
 Route::get('/why-vis', [HomeController::class, 'whyvis'])->name('why-vis');
@@ -92,9 +96,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [UserAuthController::class, 'login']);
     Route::get('/logout', [UserAuthController::class, 'logout']);
     Route::get('/forgot/password', [UserAuthController::class, 'showForgotForm'])->name('forgot.password');
-	Route::post('/forgot/password', [UserAuthController::class, 'sendResetLink'])->name('reset.password.link');
-	Route::get('/reset/password/{token}', [UserAuthController::class, 'showResetForm'])->name('reset.password.form');
-	Route::post('/reset/password', [UserAuthController::class, 'resetPassword'])->name('reset.password');
+    Route::post('/forgot/password', [UserAuthController::class, 'sendResetLink'])->name('reset.password.link');
+    Route::get('/reset/password/{token}', [UserAuthController::class, 'showResetForm'])->name('reset.password.form');
+    Route::post('/reset/password', [UserAuthController::class, 'resetPassword'])->name('reset.password');
 
     Route::group(['middleware' => ['authenticate.user', 'authorise.user']], function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard']);
@@ -124,7 +128,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/festivals/delete/{id}', [FestContoller::class, 'delete_festivals']);
         Route::post('/festivals/year', [FestContoller::class, 'create_year'])->name('create_year');
 
-        
+
         // Banner Routes
         Route::get('/banner', [BannerImageController::class, 'banner_list'])->name('banner.list');
         Route::get('/banner/create', [BannerImageController::class, 'create_banner'])->name('banner.create');
@@ -136,38 +140,38 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/mpd/create', [MPDController::class, 'create_mpd'])->name('mpd.create');
         Route::post('/mpd/store', [MPDController::class, 'store_mpd'])->name('mpd.store');
         Route::delete('/mpd/delete/{id}', [MPDController::class, 'delete_mpd'])->name('mpd.delete');
-       
+
         //Latest News & Announcements
         Route::get('/latestnews&announcements', [LatestNewsAnnouncementsController::class, 'lna_list'])->name('lna.list');
         Route::get('/latestnews&announcements/create', [LatestNewsAnnouncementsController::class, 'create_lna'])->name('lna.create');
         Route::post('/latestnews&announcements/store', [LatestNewsAnnouncementsController::class, 'store_lna'])->name('lna.store');
         Route::delete('/latestnewsannouncements/delete/{id}', [LatestNewsAnnouncementsController::class, 'delete_lna'])->name('lna.delete');
-        
+
         //transercertificates
         Route::get('/tc', [TranserCertificateController::class, 'tc_list'])->name('tc.list');
         Route::get('/tc/create', [TranserCertificateController::class, 'create_tc'])->name('tc.create');
         Route::post('/tc/store', [TranserCertificateController::class, 'store_tc'])->name('tc.store');
         Route::delete('/tc/delete/{id}', [TranserCertificateController::class, 'delete_tc'])->name('tc.delete');
 
-         // Gallery Routes
-         Route::get('/gallery', [GalleryController::class, 'gallery_list'])->name('gallery.list');
-         Route::get('/gallery/create', [GalleryController::class, 'create_gallery'])->name('gallery.create');
-         Route::post('/gallery/store', [GalleryController::class, 'store_gallery'])->name('gallery.store');
-         Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit_gallery'])->name('gallery.edit');
-         Route::put('/gallery/update/{id}', [GalleryController::class, 'update_gallery'])->name('gallery.update');
-         Route::post('gallery/upload/{id}', [GalleryController::class, 'uploadImages'])->name('gallery.upload');
-         Route::delete('/gallery/delete/{id}', [GalleryController::class, 'delete_gallery'])->name('gallery.delete');
+        // Gallery Routes
+        Route::get('/gallery', [GalleryController::class, 'gallery_list'])->name('gallery.list');
+        Route::get('/gallery/create', [GalleryController::class, 'create_gallery'])->name('gallery.create');
+        Route::post('/gallery/store', [GalleryController::class, 'store_gallery'])->name('gallery.store');
+        Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit_gallery'])->name('gallery.edit');
+        Route::put('/gallery/update/{id}', [GalleryController::class, 'update_gallery'])->name('gallery.update');
+        Route::post('gallery/upload/{id}', [GalleryController::class, 'uploadImages'])->name('gallery.upload');
+        Route::delete('/gallery/delete/{id}', [GalleryController::class, 'delete_gallery'])->name('gallery.delete');
 
         //  Route::delete('/gallery/delete/{id}', [GalleryController::class, 'delete_gallery'])->name('gallery.delete');
 
-         //activites.
+        //activites.
         Route::get('/activites', [ActivityController::class, 'activites_list']);
         Route::get('/activites/create', [ActivityController::class, 'create_activites']);
         Route::post('/activites/store', [ActivityController::class, 'store_activites']);
         Route::get('/activites/edit/{id}', [ActivityController::class, 'edit_activites']);
         Route::post('/activites/update', [ActivityController::class, 'update_activites']);
         Route::delete('/activites/delete/{id}', [ActivityController::class, 'delete_activites']);
-        
+
         //marquee 
         Route::get('/marquee/create/{id}', [MarqueesController::class, 'create_marquee'])->name('marquee.create');
         Route::post('/marquee/store', [MarqueesController::class, 'store_marquee'])->name('marquee.store');
@@ -175,17 +179,17 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/marquee/update/{id}', [MarqueesController::class, 'update_marquee'])->name('marquee.update');
 
         //social media  
-        Route::get('/social-contact', [SocialContactController::class,'social_edit'])->name('edit.social_contact');
-        Route::post('/social-contact', [SocialContactController::class,'social_update'])->name('update.social_contact');
+        Route::get('/social-contact', [SocialContactController::class, 'social_edit'])->name('edit.social_contact');
+        Route::post('/social-contact', [SocialContactController::class, 'social_update'])->name('update.social_contact');
 
         //PrincipalDesk
-        Route::get('/principal-desk', [PrinciapalDeskController::class,'principal_edit'])->name('edit.principal-desk');
-        Route::post('/principal-desk', [PrinciapalDeskController::class,'principal_update'])->name('update.principal-desk');
+        Route::get('/principal-desk', [PrinciapalDeskController::class, 'principal_edit'])->name('edit.principal-desk');
+        Route::post('/principal-desk', [PrinciapalDeskController::class, 'principal_update'])->name('update.principal-desk');
 
         //Calender
         Route::get('/fullcalender', [FullCalenderController::class, 'index']);
         Route::post('/fullcalenderAjax', [FullCalenderController::class, 'ajax']);
-        
+
         //Admission 
         Route::get('/admission', [AdmissionProcedureController::class, 'admission_list'])->name('admission.list');
         Route::get('/admission/create', [AdmissionProcedureController::class, 'create_admission'])->name('admission.create');
@@ -207,27 +211,27 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/fee-structure/delete/{id}', [FeeStructureController::class, 'delete_feestructure'])->name('feestructure.delete');
 
         //Achievers
-         Route::get('/achievers', [AchieversDataController::class, 'achievers_list'])->name('achievers.list');
-         Route::get('/achievers/create', [AchieversDataController::class, 'create_achievers'])->name('achievers.create');
-         Route::post('/achievers/store', [AchieversDataController::class, 'store_achievers'])->name('achievers.store');
-         Route::get('/achievers/edit/{id}', [AchieversDataController::class, 'edit_achievers'])->name('achievers.edit');
-         Route::put('/achievers/update/{id}', [AchieversDataController::class, 'update_achievers'])->name('achievers.update');
-         Route::delete('/achievers/delete/{id}', [AchieversDataController::class, 'delete_achievers'])->name('achievers.delete');
+        Route::get('/achievers', [AchieversDataController::class, 'achievers_list'])->name('achievers.list');
+        Route::get('/achievers/create', [AchieversDataController::class, 'create_achievers'])->name('achievers.create');
+        Route::post('/achievers/store', [AchieversDataController::class, 'store_achievers'])->name('achievers.store');
+        Route::get('/achievers/edit/{id}', [AchieversDataController::class, 'edit_achievers'])->name('achievers.edit');
+        Route::put('/achievers/update/{id}', [AchieversDataController::class, 'update_achievers'])->name('achievers.update');
+        Route::delete('/achievers/delete/{id}', [AchieversDataController::class, 'delete_achievers'])->name('achievers.delete');
         //  Route::post('/achievers/delete-image', 'AchieverController@deleteAchieverImage')->name('achievers.deleteImage');
 
-         // Scout&guide Routes
-         Route::get('/scout-&-guide', [ScoutGuideController::class, 'scout_list'])->name('scout.list');
-         Route::get('/scout-&-guide/create', [ScoutGuideController::class, 'create_scout'])->name('scout.create');
-         Route::post('/scout-&-guide/store', [ScoutGuideController::class, 'store_scout'])->name('scout.store');
-         Route::delete('/scout-&-guide/delete/{id}', [ScoutGuideController::class, 'delete_scout'])->name('scout.delete');
+        // Scout&guide Routes
+        Route::get('/scout-&-guide', [ScoutGuideController::class, 'scout_list'])->name('scout.list');
+        Route::get('/scout-&-guide/create', [ScoutGuideController::class, 'create_scout'])->name('scout.create');
+        Route::post('/scout-&-guide/store', [ScoutGuideController::class, 'store_scout'])->name('scout.store');
+        Route::delete('/scout-&-guide/delete/{id}', [ScoutGuideController::class, 'delete_scout'])->name('scout.delete');
 
-         // Scout&guide Routes
-         Route::get('/sports', [SportImageController::class, 'sports_list'])->name('sports.list');
-         Route::get('/sports/create', [SportImageController::class, 'create_sports'])->name('sports.create');
-         Route::post('/sports/store', [SportImageController::class, 'store_sports'])->name('sports.store');
-         Route::delete('/sports/delete/{id}', [SportImageController::class, 'delete_sports'])->name('sports.delete');
+        // Scout&guide Routes
+        Route::get('/sports', [SportImageController::class, 'sports_list'])->name('sports.list');
+        Route::get('/sports/create', [SportImageController::class, 'create_sports'])->name('sports.create');
+        Route::post('/sports/store', [SportImageController::class, 'store_sports'])->name('sports.store');
+        Route::delete('/sports/delete/{id}', [SportImageController::class, 'delete_sports'])->name('sports.delete');
 
-        Route::controller(CategoryController::class)->group(function() {
+        Route::controller(CategoryController::class)->group(function () {
             Route::get('/category', 'index')->name('category');
             Route::get('/category/create', 'create_category')->name('categoryCreate');
             Route::post('/category/check', 'check_category')->name('categoryCheck');
@@ -235,8 +239,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/category/delete/{id}/{path}', 'delete_category')->name('categoryDelete');
         });
 
-         // Product
-        Route::controller(ProductController::class)->group(function() {
+        // Product
+        Route::controller(ProductController::class)->group(function () {
             Route::get('/products', 'index')->name('products');
             Route::get('/product/create', 'create_product')->name('productCreate');
             Route::post('/product/check', 'check_product')->name('productCheck');
@@ -258,5 +262,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/facilities/update', [FacilityController::class, 'update_facilities']);
         Route::delete('/facilities/delete/{id}', [FacilityController::class, 'delete_facilities']);
 
+        Route::get('/vision&mission', [VisionMissionController::class, 'visionMission']);
+        Route::post('/vision&mission/store', [VisionMissionController::class, 'store_visionMission']);
     });
 });

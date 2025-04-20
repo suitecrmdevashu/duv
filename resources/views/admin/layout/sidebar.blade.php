@@ -95,46 +95,44 @@
 
 
 
-
-            <li class="nav-item @if (Session::get('active') == 'marquee' || Session::get('active') == 'banner' || Session::get('active') == 'facility' ) menu-is-opening menu-open @endif">
-                <a href="#" class="nav-link @if (Session::get('active') == 'marquee' || Session::get('active') == 'facility' || Session::get('active') == 'banner') menu-is-opening menu-open @endif">
-                    <i class="nav-icon fas fa-list"></i>
+            @php
+            $aboutActive = in_array(Session::get('active'), ['visionMission', 'principal', 'mission']) ? 'menu-is-opening menu-open' : '';
+        @endphp
+        
+            <!-- About Us Menu -->
+            <li class="nav-item {{ $aboutActive }}">
+                <a href="#" class="nav-link {{ $aboutActive ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-info-circle"></i>
                     <p>
-                        Home Page
+                        About Us
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    @can('create_marquee')
+                    @can('visionMission')
                         <li class="nav-item">
-                            <a href="/admin/marquee/create/1"
-                                class="nav-link @if (Session::get('active') == 'marquee') active @endif">
+                            <a href="/admin/vision&mission" class="nav-link {{ Session::get('active') == 'visionMission' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Marquee
-                                </p>
+                                <p> Vision & Mission</p>
                             </a>
                         </li>
                     @endcan
 
-                    @can('create_banner')
+                    @can('principal_edit')
                         <li class="nav-item">
-                            <a href="/admin/banner" class="nav-link @if (Session::get('active') == 'banner') active @endif">
+                            <a href="/admin/principal-desk" class="nav-link {{ Session::get('active') == 'principal' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Banner Images
-                                </p>
+                                <p> Principal Desk</p>
                             </a>
                         </li>
                     @endcan
 
-                    @can('create_facilities')
+                    @can('create_mission')
                         <li class="nav-item">
-                            <a href="/admin/facilities" class="nav-link @if (Session::get('active') == 'facility') active @endif">
+                            <a href="/admin/mission"
+                                class="nav-link {{ Session::get('active') == 'mission' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                  Facilities
-                                </p>
+                                <p>Mission</p>
                             </a>
                         </li>
                     @endcan
@@ -193,15 +191,6 @@
                     <i class="nav-icon far fa-plus-square"></i>
                     <p>
                         Fee Structure
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="/admin/principal-desk" class="nav-link @if (Session::get('active') == 'principal') active @endif">
-                    <i class="nav-icon far fa-plus-square"></i>
-                    <p>
-                        Principal Desk
                     </p>
                 </a>
             </li>

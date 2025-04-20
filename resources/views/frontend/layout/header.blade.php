@@ -64,7 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
         <div id="navigation-regular" class="">
-            <!-- navigation -->
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="#">About Us</a>
@@ -87,8 +86,6 @@
                 <li><a href="#">Co-curricular Activities</a>
                     <ul>
                         <li><a href="{{ route('sport') }}">Sports</a></li>
-                        {{-- <li><a href="{{ route('art-craft') }}">Art & Craft</a></li> --}}
-                        {{-- <li><a href="{{ route('music-dance') }}">Music & Dance </a></li> --}}
                         <li><a href="{{ route('house-system') }}">House System</a></li>
                         <li><a href="{{ route('club') }}">SUPW/Club Activites</a></li>
                         <li><a href="{{ route('scoutguide') }}">Scout & Guide</a></li>
@@ -120,7 +117,7 @@
                     <ul>
                         <li><a href="{{ route('activites') }}">Activites</a></li>
                         <li><a href="{{ route('holidays') }}">Holidays</a></li>
-                        {{-- <li><a href="{{ route('calendar') }}">Calendar</a></li> --}}
+                       
                     </ul>
                 </li>
 

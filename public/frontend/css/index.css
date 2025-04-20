@@ -7,6 +7,11 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+.facilities-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
 
 .header-content li:first-child {
     border: none;
