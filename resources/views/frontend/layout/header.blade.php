@@ -60,9 +60,21 @@
 </header>
 
   <!--Nav-->
+
   <nav class="navbar navbar-expand-lg topnav">
+  <button class="navbar-toggler nav-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" 
+  >
+  <div class="toggle-icons">
+    <span class="span1"></span>
+    <span class="span2"></span>
+    <span class="span3"></span>
+  </div>
+</button>
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
+        <form class="form-inline my-2 my-lg-0">
         <div id="navigation-regular" class="">
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
@@ -125,5 +137,14 @@
                 <li><a href="{{ route('newsannouncements') }}">Latest News & Announcements</a></li>
             </ul>
         </div>
+        </form>
     </div>
 </nav>
+
+<script>
+  const toggleBtn = document.querySelector('.nav-toggle');
+
+  toggleBtn.addEventListener('click', function () {
+    this.classList.toggle('active');
+  });
+</script>
