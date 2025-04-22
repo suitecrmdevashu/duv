@@ -5,9 +5,162 @@
             --background-image-url: url('{{ asset('frontend/images/wel.png') }}');
             --background-image-url1: url('{{ asset('frontend/images/index-about-charity.jpg') }}');
         }
+        .modern-stripe-section {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .stripe-container {
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .stripe-items-list {
+        display: flex;
+        height: 500px;
+    }
+    
+    .stripe-item {
+        position: relative;
+        flex: 1;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: all 0.5s ease;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    
+    .stripe-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        z-index: 1;
+        transition: all 0.3s ease;
+    }
+    
+    .stripe-item:hover {
+        flex: 1.5;
+    }
+    
+    .stripe-item:hover::before {
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+    }
+    
+    .stripe-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+    }
+    
+    .stripe-content-wrapper {
+        position: relative;
+        z-index: 3;
+        color: white;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        opacity: 0.9;
+        width: 100%;
+    }
+    
+    .stripe-item:hover .stripe-content-wrapper {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .stripe-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .stripe-divider {
+        width: 50px;
+        height: 2px;
+        background: #fff;
+        margin: 15px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .stripe-item:hover .stripe-divider {
+        width: 70px;
+    }
+    
+    .stripe-content {
+        font-size: 16px;
+        line-height: 1.6;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .stripe-item:hover .stripe-content {
+        max-height: 100px;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .stripe-items-list {
+            height: 400px;
+        }
+        
+        .stripe-title {
+            font-size: 20px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .stripe-items-list {
+            flex-direction: column;
+            height: auto;
+        }
+        
+        .stripe-item {
+            height: 200px;
+            width: 100% !important;
+            flex: auto !important;
+        }
+        
+        .stripe-content {
+            max-height: 100px !important;
+        }
+        
+        .stripe-content-wrapper {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .stripe-item {
+            height: 150px;
+            padding: 20px;
+        }
+        
+        .stripe-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/index.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/index.css') }}" /> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/js_composer.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 @endpush
@@ -115,93 +268,66 @@
 
 
     <!--modern school-->
-    <div class="modern">
-        <div data-vc-full-width="true" data-vc-full-width-init="true" data-vc-stretch-content="true"
-            class="vc_row wpb_row vc_row-fluid vc_row-no-padding">
-            <div class="wpb_column vc_column_container vc_col-sm-12">
-                <div class="vc_column-inner ">
-                    <div class="wpb_wrapper">
-                        <div class="vc_row">
-                            <div class="vc_col-sm-12 gt3_stripe_columns  ">
-                                <div class="module_content stripe_items_list items1" data-count-child="5">
 
-                                    <div class="stripe_item"
-                                        style="height:600px;width:20%;background-image:url('{{ asset('frontend/images/admission.png') }}')">
-                                        <a class="gt3_stripe-link" href="{{ route('admission') }}"> </a>
-                                        <div class="stripe_item-wrapper">
-                                            <h3 class="stripe_item-title btn btn-default" style=" color: #ffffff;">
-                                                ADMISSIONS
-                                            </h3>
-                                            <div class="stripe_item-divider"></div>
-                                            <div class="stripe_item-content" style=" color: #ffffff;">
-                                                <!-- Learn about your child’s admission
-                            requirements, how to apply, and the next steps once you’ve applied. -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="stripe_item"
-                                        style="height:600px;width:20%;background-image:url('{{ asset('frontend/images/video.jpg') }}')">
-                                        <a class="gt3_stripe-link" href="{{ route('schooltour') }}" target=" _blank"> </a>
-                                        <div class="stripe_item-wrapper">
-                                            <h3 class="stripe_item-title btn btn-default" style=" color: #ffffff;">School
-                                                Tour Video
-                                            </h3>
-                                            <div class="stripe_item-divider"></div>
-                                            <div class="stripe_item-content" style=" color: #ffffff;"><span>
-                                                    <!-- The Vishal International School is
-                              a co-education public school. The school is affiliated to the CBSE board. -->
-                                                </span></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="stripe_item"
-                                        style="height:600px;width:20%;background-image:url('{{ asset('frontend/images/new-sports.jpg') }}')">
-                                        <a class="gt3_stripe-link" href="{{ route('sport') }}" title="Sports"
-                                            target=" _blank"> </a>
-                                        <div class="stripe_item-wrapper">
-                                            <h3 class="stripe_item-title btn btn-default" style=" color: #ffffff;">SPORTS
-                                            </h3>
-                                            <div class="stripe_item-divider"></div>
-                                            <div class="stripe_item-content" style=" color: #ffffff;">
-                                                <!-- Education at SASSS isn’t limited to the
-                            classroom. It happens throughout campus each and every day through our student activities. -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="stripe_item"
-                                        style="height:600px;width:20%;background-image:url('{{ asset('frontend/images/gallery.jpg') }}')">
-                                        <a class="gt3_stripe-link" href="{{ route('gallery') }}" target=" _blank"> </a>
-                                        <div class="stripe_item-wrapper">
-                                            <h3 class="stripe_item-title btn btn-default" style=" color: #ffffff;">Gallery
-                                            </h3>
-                                            <div class="stripe_item-divider"></div>
-                                            <div class="stripe_item-content" style=" color: #ffffff;"><span>
-                                                    <!-- Co-Curricular activities are meant
-                              to bring social skills, intellectual skills, moral values, personality progress and character
-                              appeal in students. -->
-                                                </span></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="stripe_item"
-                                        style="height:600px;width:20%;background-image:url('{{ asset('frontend/images/achievers.jpeg') }}')">
-                                        <a class="gt3_stripe-link" href="{{ route('achievers') }}" target=" _blank">
-                                        </a>
-                                        <div class="stripe_item-wrapper">
-                                            <h3 class="stripe_item-title btn btn-default" style=" color: #ffffff;">
-                                                Achievers
-                                            </h3>
-                                            <div class="stripe_item-divider"></div>
-                                            <div class="stripe_item-content" style=" color: #ffffff;">
-                                                <!-- Where you live, plays an important role
-                            in child’s development. We ensure the highest form of care is extended to them. -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="modern-stripe-section mt-3">
+        <div class="stripe-container">
+            <div class="stripe-items-list">
+                <!-- Admission -->
+                <div class="stripe-item" style="background-image:url('{{ asset('frontend/images/admission.png') }}')">
+                    <a class="stripe-link" href="{{ route('admission') }}"></a>
+                    <div class="stripe-content-wrapper">
+                        <h3 class="stripe-title">ADMISSIONS</h3>
+                        <div class="stripe-divider"></div>
+                        <div class="stripe-content">
+                            Learn about your child's admission requirements, how to apply, and next steps.
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- School Tour -->
+                <div class="stripe-item" style="background-image:url('{{ asset('frontend/images/video.jpg') }}')">
+                    <a class="stripe-link" href="{{ route('schooltour') }}" target="_blank"></a>
+                    <div class="stripe-content-wrapper">
+                        <h3 class="stripe-title">School Tour Video</h3>
+                        <div class="stripe-divider"></div>
+                        <div class="stripe-content">
+                            Take a virtual tour of our campus facilities and classrooms.
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Sports -->
+                <div class="stripe-item" style="background-image:url('{{ asset('frontend/images/new-sports.jpg') }}')">
+                    <a class="stripe-link" href="{{ route('sport') }}" title="Sports" target="_blank"></a>
+                    <div class="stripe-content-wrapper">
+                        <h3 class="stripe-title">SPORTS</h3>
+                        <div class="stripe-divider"></div>
+                        <div class="stripe-content">
+                            Explore our sports programs and athletic achievements.
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Gallery -->
+                <div class="stripe-item" style="background-image:url('{{ asset('frontend/images/gallery.jpg') }}')">
+                    <a class="stripe-link" href="{{ route('gallery') }}" target="_blank"></a>
+                    <div class="stripe-content-wrapper">
+                        <h3 class="stripe-title">Gallery</h3>
+                        <div class="stripe-divider"></div>
+                        <div class="stripe-content">
+                            View photos from school events and daily activities.
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Achievers -->
+                <div class="stripe-item" style="background-image:url('{{ asset('frontend/images/achievers.jpeg') }}')">
+                    <a class="stripe-link" href="{{ route('achievers') }}" target="_blank"></a>
+                    <div class="stripe-content-wrapper">
+                        <h3 class="stripe-title">Achievers</h3>
+                        <div class="stripe-divider"></div>
+                        <div class="stripe-content">
+                            Celebrating our students' academic and extracurricular accomplishments.
                         </div>
                     </div>
                 </div>

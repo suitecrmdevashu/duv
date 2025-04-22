@@ -28,6 +28,7 @@ use Mail;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\VisionMission;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -38,7 +39,8 @@ class HomeController extends Controller
     }
 
     public function visionmission(){
-        return view('frontend.vissionmission');
+        $missionVision = VisionMission::find(1); 
+        return view('frontend.vissionmission',compact('missionVision'));
     }
 
     public function whyvis(){
