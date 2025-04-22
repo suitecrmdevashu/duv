@@ -52,8 +52,8 @@ class HomeController extends Controller
     }
 
     public function principaldesk(){
-        $principals = Principal::all();
-        return view('frontend.principaldesk',compact('principals'));
+        $principals = Principal::get();
+        return view('frontend.principaldesk',['principals'=>$principals]);
     }
 
     public function teachingmethodolgy(){

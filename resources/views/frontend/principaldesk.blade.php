@@ -1,39 +1,139 @@
 @extends('frontend.layout.master', ['page_title' => 'Principal Desk'])
 @push('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/principal-desk.css') }}"/>
+    <style>
+        .chairman-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .chairman-content {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            height: 100%;
+        }
+
+        .chairman-section h2 {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .chairman-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #8ea139;
+        }
+
+        .chairman-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .chairman-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .chairman-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .chairman-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .chairman-signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .chairman-signature p {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .chairman-signature p:first-child {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .chairman-content {
+                margin-bottom: 30px;
+            }
+
+            .chairman-image {
+                max-height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chairman-section {
+                padding: 60px 0;
+            }
+
+            .chairman-content {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .chairman-section {
+                padding: 40px 0;
+            }
+
+            .chairman-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .chairman-content {
+                padding: 25px;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')
-<div class="container about-section">
-    <div class="row principal-section">
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-            <h2 class="pt-4">Principal's Desk</h2>
-            {{-- <p class="font-weight-bold text-justify">“Teamwork is the ability to work together towards Common Vision”</p> --}}
-            {{-- <p class="text-justify">Sharing my views through this virtual platform is really a matter of pleasure for me. Developing Individual Strength with Loving Guidance is the ability to direct individual accomplishments towards organizational objectives. I endeavor to instill in the students, the sense of responsibility and initiative to become useful members of the society, so that they can play the role in building the Nation (Great India). I believe that the meaningful education driven by our principles, respect, rigor and involvement that will make us more responsible towards dedication to create peaceful environment and acceptance. Human mind is the seat of all knowledge and it should be acquired to distinguish between right or wrong through education.
-            </p> --}}
-            {{-- <p class="text-justify">
-                The aim of education should be to impart knowledge to the students, not only of the facts but of the values also with an immense pride and feeling of great satisfaction. Our vision is to produce conscientious, smart, confident citizens of India by exploring new ways of performing tasks.
-            </p> --}}
-            @foreach($principals as $principal)
-            <p class="text-justify">{!! $principal->message !!}</p>
+<div class="chairman-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Content Column -->
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-lg-1 order-2">
+                <div class="chairman-content">
+                    <h2>Principal's Desk</h2>
 
-        </div>
+                    <p>{!! $principals->first()->message ?? '' !!}</p>
 
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-            <div class="principal-pic">
-                <img src="{{asset( $principal->image)}}" alt="simple bootstrap template" class="img-fluid">
+                    <div class="chairman-signature">
+                        <p><strong>{{ $principals->first()->name ?? '' }}</strong></p>
+                        <p><strong>Principal</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-lg-2 order-1 mb-lg-0 mb-4">
+                <div class="chairman-image">
+                    <img src="{{ asset($principals->first()->image ?? '') }}" alt="Principal" class="img-fluid">
+                </div>
             </div>
         </div>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            {{-- <p class="text-justify">Our school is striving to unfold the hidden potential of each and every student and enhance their capabilities by providing ample opportunities in the cultural literacy as well as sporty front, keeping pace with technology and Development with the introduction of smart classes, computer aided teaching, students are marching towards unlimited knowledge. We are sure that our computer labs and smart classes will go a long way in feeding the Intellectual requirements of our young minds to assess the latest information both locally and globally.</p>
-            <p class="font-weight-bold">“Working for Success will make you a Master; Working for Satisfaction will make you a Legend”</p> --}}
-            <p class="pt-3"><b></b>{{ $principal->name }}
-                </b></p>
-                @endforeach 
-            <p><b>Principal</b></p>
-        </div>
-
-
     </div>
 </div>
 @endsection
+

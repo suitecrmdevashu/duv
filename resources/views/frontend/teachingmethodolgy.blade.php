@@ -1,6 +1,6 @@
 @extends('frontend.layout.master', ['page_title' => 'Teaching-Methodolgy'])
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/chairman-desk.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/chairman-desk.css') }}" /> --}}
 @endpush
 
 @section('content')
@@ -13,11 +13,7 @@
                     the strategies are determined partly on the subject matter to be taught and partly by the nature of
                     learning e.g. Audio Lingual, Showing & Telling worked examples, Interactive Lecture -Discussion Based,
                     Problem Solving Based, Project Based so on and so forth.<br><br>
-
                 </p>
-
-
-
             </div>
         </div>
     </div>

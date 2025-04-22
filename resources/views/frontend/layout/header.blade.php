@@ -222,12 +222,12 @@
                 @foreach ($SocialContacts as $SocialInfor)
                     <li>
                         <a href="{{ $SocialInfor->facebook }}" target="_blank" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
+                            <i class="fa fa-facebook-f"></i>
                         </a>
                     </li>
                     <li>
                         <a href="{{ $SocialInfor->youtube }}" target="_blank" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
+                            <i class="fa fa-youtube"></i>
                         </a>
                     </li>
                 @endforeach
@@ -289,7 +289,7 @@
                             <li><a href="{{ route('aboutschool') }}">School Overview</a></li>
                             <li><a href="{{ route('visionmission') }}">Vision & Mission </a>
                             </li>
-                            <li><a href="{{ route('why-vis') }}">Why VIS </a></li>
+                            <li><a href="{{ route('why-vis') }}">Why DUV </a></li>
                             <li><a href="{{ route('chairmandesk') }}">Chairman’s Desk</a></li>
                             <li><a href="{{ route('principaldesk') }}">Principal’s Desk</a></li>
                         </ul>
