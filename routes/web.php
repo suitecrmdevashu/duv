@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\AchieversDataController;
 use App\Http\Controllers\Admin\ScoutGuideController;
 use App\Http\Controllers\Admin\SportImageController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChairmanDeskController;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\Notifications;
 use App\Http\Controllers\Admin\ProductController;
@@ -185,6 +186,10 @@ Route::group(['prefix' => 'admin'], function () {
         //PrincipalDesk
         Route::get('/principal-desk', [PrinciapalDeskController::class, 'principal_edit'])->name('edit.principal-desk');
         Route::post('/principal-desk', [PrinciapalDeskController::class, 'principal_update'])->name('update.principal-desk');
+
+         //PrincipalDesk
+         Route::get('/chairman-desk', [ChairmanDeskController::class, 'chairman_edit'])->name('edit.chairman-desk');
+         Route::post('/chairman-desk', [ChairmanDeskController::class, 'chairman_update'])->name('update.chairman-desk');
 
         //Calender
         Route::get('/fullcalender', [FullCalenderController::class, 'index']);

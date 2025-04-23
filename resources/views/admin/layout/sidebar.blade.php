@@ -127,12 +127,12 @@
                         </li>
                     @endcan
 
-                    @can('create_mission')
+                    @can('chairman_edit')
                         <li class="nav-item">
-                            <a href="/admin/mission"
-                                class="nav-link {{ Session::get('active') == 'mission' ? 'active' : '' }}">
+                            <a href="/admin/chairman-desk"
+                                class="nav-link {{ Session::get('active') == 'chairmandesk' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Mission</p>
+                                <p>Chairman Desk</p>
                             </a>
                         </li>
                     @endcan

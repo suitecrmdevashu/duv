@@ -7,6 +7,7 @@ use App\Models\Achiever;
 use App\Models\AchieverHeading;
 use App\Models\Festival;
 use App\Models\Activitie;
+use App\Models\ChairmanDesk;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use App\Models\Mandatory_public_disclosure;
@@ -50,7 +51,8 @@ class HomeController extends Controller
     }
 
     public function chairmandesk(){
-        return view('frontend.charimandesk');
+        $chairmandesk = ChairmanDesk::get(); 
+        return view('frontend.charimandesk',['chairmandesk'=>$chairmandesk]);
     }
 
     public function principaldesk(){

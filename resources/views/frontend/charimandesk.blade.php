@@ -1,4 +1,4 @@
-@extends('frontend.layout.master', ['page_title' => 'chairmandesk'])
+@extends('frontend.layout.master', ['page_title' => 'Chairman Desk'])
 @push('styles')
 <style>
     .chairman-section {
@@ -116,12 +116,10 @@
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-lg-1 order-2">
                 <div class="chairman-content">
                     <h2>Chairman's Desk</h2>
-                    <p>Vishal International School stands at the threshold of changing global patterns and perspectives where every new day dawns with new challenges. Our strong academic thrust is supplemented with providing direction and guidance to young learners to understand the changing social values, norms and societal pressures, so that they may take informed decisions.</p>
-                    <p>Our endeavor is to nurture moral and intellectual leaders, individuals with dignity, integrity and compassion who want to make a positive difference in the world.</p>
-                    <p>The school aims at providing an all-round education and trains the students intellectually, morally, spiritually and physically so as to inculcate in them the right principles of conduct and the right attitude in life, thereby enabling them to become loyal and useful citizens of our country.</p>
+                    <p>{!! $chairmandesk->first()->message ?? '' !!}</p>
                     
                     <div class="chairman-signature">
-                        <p><strong>Mrs. Vimlesh Yadav</strong></p>
+                        <p><strong>{{ $chairmandesk->first()->name ?? '' }}</strong></p>
                         <p><strong>Chairman</strong></p>
                     </div>
                 </div>
@@ -130,7 +128,7 @@
             <!-- Image Column -->
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-lg-2 order-1 mb-lg-0 mb-4">
                 <div class="chairman-image">
-                    <img src="{{ asset('frontend/images/chairmen.jpg')}}" alt="Mrs. Vimlesh Yadav, Chairman of Vishal International School" class="img-fluid">
+                    <img src="{{ asset($chairmandesk->first()->image ?? '') }}" alt="{{ $chairmandesk->first()->name ?? '' }}" class="img-fluid">
                 </div>
             </div>
         </div>
