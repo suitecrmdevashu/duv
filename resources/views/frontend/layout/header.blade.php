@@ -63,7 +63,7 @@
         justify-content: center;
         position: relative;
         z-index: 2;
-        padding: 20px 0; /* Added internal padding */
+        /* padding: 20px 0; Added internal padding */
     }
     
     .logo-container img {

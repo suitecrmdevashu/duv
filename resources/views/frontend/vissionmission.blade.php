@@ -1,93 +1,142 @@
-@extends('frontend.layout.master', ['page_title' => 'vision & mission'])
+@extends('frontend.layout.master', ['page_title' => 'Vision & Mission'])
 @push('styles')
-    <style>
-         .mission-card {
-        padding: 20px;
-        box-sizing: border-box;
+<style>
+    .mission-vision-section {
+        background: #f8f9fa;
+        padding: 80px 0;
     }
     
-    @media (max-width: 767px) {
-        .principal-section {
-            flex-direction: column;
+    .mission-vision-container {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 40px;
+    }
+    
+    .mission-vision-title {
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+    
+    .mission-vision-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #3498db;
+    }
+    
+    .mission-card {
+        border-radius: 8px;
+        padding: 30px;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .mission-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .mission-card h2 {
+        color: #2c3e50 !important;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .mission-card h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: #3498db;
+    }
+    
+    .mission-card p {
+        color: #555 !important;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .mission-card.mission {
+        background-color: #e7f5ff;
+        border-left: 4px solid #3498db;
+    }
+    
+    .mission-card.vision {
+        background-color: #fff8e6;
+        border-left: 4px solid #f39c12;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .mission-vision-section {
+            padding: 60px 0;
+        }
+        
+        .mission-vision-container {
+            padding: 30px;
         }
         
         .mission-card {
-            min-height: 250px !important; /* Adjust as needed for mobile */
+            margin-bottom: 30px;
+            min-height: auto;
         }
     }
     
-    @media (min-width: 768px) {
+    @media (max-width: 576px) {
+        .mission-vision-section {
+            padding: 40px 0;
+        }
+        
+        .mission-vision-title {
+            font-size: 1.8rem;
+        }
+        
+        .mission-vision-container {
+            padding: 20px;
+        }
+        
         .mission-card {
-            min-height: 600px;
+            padding: 20px;
         }
     }
-    
-    /* Maintain background colors */
-    .tb1 {
-        background: /* your original background color or class */;
-    }
-    
-    .tb2 {
-        background: /* your original background color or class */;
-    }
-    
-        .principal-section {
-            padding-top: 0px;
-            padding-bottom: 47px;
-        }
-
-        .paddingm {
-            padding: 10px 20px;
-
-        }
-
-        .tb1 {
-            /*background-image: -webkit-linear-gradient( 0deg , rgb(35,204,136) 0%, rgb(142,207,53) 100%)!important;*/
-            background-image: linear-gradient(to bottom, #69c 40%, #316598);
-        }
-
-        p {
-            margin-bottom: 0px;
-            color: white !important;
-        }
-
-        ul {
-            color: white !important;
-        }
-
-        .tb2 {
-            /*background-image: -webkit-linear-gradient( 0deg , rgb(255,79,88) 0%, rgb(255,180,0) 100%)!important;*/
-            background-image: linear-gradient(to bottom, #ab7967 40%, #724b38);
-        }
-
-        p:last-child {
-            margin-bottom: 0px;
-        }
-
-        h2 {
-            font-size: 26px;
-            font-weight: normal;
-            color: #e2002d;
-        }
-    </style>
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/about.css') }}"/> --}}
+</style>
 @endpush
-@section('content')
-<div class="bg-light">
-    <div class="container about-section">
-        <h2 class="pt-4 font-weight-bold">Our Mission &amp; Vision</h2>
-        <div class="row principal-section" style="text-align:justify">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-4 mb-lg-0">
-                <div class="tb1 paddingm mission-card" style="width: 100%; height: 100%; min-height: 300px;">
-                    <h2 class="pt-4" style="color:#fff;">Our Mission</h2>
-                    <p style="color:#fff !important;">{!! $missionVision->mission !!}</p>
-                </div>
-            </div>
 
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 missionm">
-                <div class="tb2 paddingm mission-card" style="width: 100%; height: 100%; min-height: 300px;">
-                    <h2 class="pt-4" style="color:#fff !important;">Our Vision</h2>
-                    <p>{!! $missionVision->vision !!}</p>
+@section('content')
+<div class="mission-vision-section">
+    <div class="container">
+        <div class="mission-vision-container">
+            <h2 class="mission-vision-title">Our Vision & Mission</h2>
+            
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                    <div class="mission-card mission">
+                        <h2>Our Mission</h2>
+                        <p>{!! $missionVision->mission !!}</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="mission-card vision">
+                        <h2>Our Vision</h2>
+                        <p>{!! $missionVision->vision !!}</p>
+                    </div>
                 </div>
             </div>
         </div>
