@@ -24,10 +24,12 @@ use App\Models\Scoutimage;
 use App\Models\Sport;
 use App\Models\Syllabus;
 use App\Models\Contact;
+use App\Models\Facilitie;
 use Mail;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\SocialContact;
 use App\Models\VisionMission;
 use Illuminate\Support\Facades\DB;
 
@@ -95,7 +97,8 @@ class HomeController extends Controller
     }
 
     public function facilities(){
-        return view('frontend.facilities');
+        $facilities = Facilitie::select('id', 'name', 'photo', 'content')->get();
+        return view('frontend.facilities',['facilities'=>$facilities]);
     }
 
     public function mpd(){
@@ -104,7 +107,8 @@ class HomeController extends Controller
     }
 
     public function contactus(){
-        return view('frontend.contactus');
+        $SocialContacts = SocialContact::all();
+        return view('frontend.contactus',['SocialContacts'=>$SocialContacts]);
     }
 
     public function contactusemail(Request $request)

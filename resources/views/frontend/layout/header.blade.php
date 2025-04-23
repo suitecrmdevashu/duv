@@ -323,7 +323,7 @@
                     <li><a href="#">Contact Us</a>
                         <ul>
                             <li><a href="{{ route('contactus') }}">Get in touch</a></li>
-                            <li><a href="{{ route('career') }}">Career @ VIS</a></li>
+                            <li><a href="{{ route('career') }}">Career @ DUV</a></li>
                         </ul>
                     </li>
 

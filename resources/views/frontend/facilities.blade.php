@@ -1,171 +1,148 @@
 @extends('frontend.layout.master', ['page_title' => 'Facilities'])
 @push('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/chairman-desk.css') }}"/>
+    <style>
+        /* Matching Infrastructure Page Styles */
+        .infra-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .infra-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+        }
+    
+        .infra-section h2 {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        
+        .infra-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #3498db;
+        }
+        
+        .infra-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .infra-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .infra-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .infra-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .infra-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .facility-body {
+            padding: 20px;
+        }
+        
+        .facility-title {
+            color: #ac7825;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+        
+        .facility-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive adjustments - matching infrastructure */
+        @media (max-width: 992px) {
+            .infra-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .infra-section {
+                padding: 60px 0;
+            }
+            
+            .infra-container {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .infra-section {
+                padding: 40px 0;
+            }
+            
+            .infra-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .infra-container {
+                padding: 20px;
+            }
+            
+            .infra-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .infra-card img {
+                height: 200px;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')
-<div class="bg-light">
-    {{-- <div class="container about-section"> --}}
-        <h2 class="pt-4 ml-5 font-weight-bold">Facilities</h2>
-        <section class="location mt-3 mb-5">
-          <div class="container business-expert">
-            <div class="row">
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/playground.jpg') }}" 0 alt="Image 2">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Playground</h3>
-                    <p class="card-text text-justify">The School Playground is specially designed for sports and games to
-                      explore and
-                      discover the possibilities.</p>
-                  </div>
+<div class="infra-section">
+    <div class="container">
+        <div class="infra-container">
+            <h2>Our Facilities</h2>
+            
+            <div class="infra-gallery">
+                <!-- Kids Play Area -->
+                @foreach ($facilities as $facilitiy)
+                <div class="infra-card">
+                    <img src="{{ asset($facilitiy->photo) }}" alt=" {{ $facilitiy->name }}">
+                    <div class="facility-body">
+                        <h3 class="facility-title"> {{ $facilitiy->name }}</h3>
+                        <p class="facility-text">{{ $facilitiy->content }}</p>
+                    </div>
                 </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/KidsPlayArea.jpeg') }}" alt="Image 2">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Kids Play Area</h3>
-                    <p class="card-text text-justify">Kids Play Area is surrounded with lush green shrubs, flowers, swings,
-                      slides, see-saw and much more.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/Dance Room.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Dance Room</h3>
-                    <p class="card-text text-justify">Dance is a joy of movement and the heart of life that is why Dance Room.
-                    </p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/Computer Lab.jpeg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Computer Lab</h3>
-                    <p class="card-text text-justify">The Computer Lab consists of latest Computers which provide tools and technologies for the students.
-                    </p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/Library.jpeg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Library</h3>
-                    <p class="card-text text-justify">The school library is equipped with well stocked Books, Catalogues,
-                      Magazines and
-                      daily Newspapers with different versions.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/transport.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Transport</h3>
-                    <p class="card-text text-justify">The school has Fleet of Buses for the students and other activities.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/smartroom.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Smart Classrooms</h3>
-                    <p class="card-text text-justify">All Classrooms are having Smart Boards and Multimedia devices.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/sportsroom.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Sports Room</h3>
-                    <p class="card-text text-justify">Sports Room is equipped with TT Table, Dart Boards and other Indoor
-                      Games for the
-                      students.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/physicslab.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Physics Lab</h3>
-                    <p class="card-text text-justify">The Physics Lab gives the students experience and expertise in Lab Tools and Techniques.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/biologylab.jpeg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Biology Lab</h3>
-                    <p class="card-text text-justify">The Biology Lab is well equipped with all required samples and apparatus for observation.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/sciencelab.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Chemistry Lab</h3>
-                    <p class="card-text text-justify">The Chemistry Lab provides students all necessary equipment and chemicals for experiments.</p>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/music-room.jpeg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h3 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Music Room</h3>
-                    <p class="card-text text-justify">Music Room is designed to play music, vocal as well as instrumental for
-                      uplifting
-                      moods of the students.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/medical room.JPG')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h5 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Medical Room</h5>
-                    <p class="card-text text-justify">School has appointed a doctor and has a two bed First Aid Room /Medical Room where injured /ill students on the premises can be taken for first aid.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-3">
-                <div class="facilities-card card">
-                  <img src="{{ asset('frontend/images/Canteen pic.jpg')}}" alt="Image 3">
-                  <div class="card-body">
-                    <h5 class="text-center mt-0" style="color: #ac7825; font-weight: 600;">Canteen</h5>
-                    <p class="card-text text-justify">School canteen facility aims to provide children of working parents to buy food at competitive prices during the school day. 
-                      Meals are bought from approved food outlets.</p>
-                  </div>
-                </div>
-              </div>
-
+                @endforeach
+                
             </div>
-          </div> 
-        </section>
-    {{-- </div> --}}
-</div>
+        </div>
+    </div>
+</div>  
 @endsection

@@ -1,143 +1,212 @@
 @extends('frontend.layout.master', ['page_title' => 'Sport'])
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/chairman-desk.css') }}" />
+<style>
+    .sports-section {
+        background: #f8f9fa;
+        padding: 80px 0;
+    }
+    
+    .sports-container {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 40px;
+    }
+    
+    .sports-section h2 {
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    
+    .sports-section h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 3px;
+        background: #e74c3c;
+    }
+    
+    .sports-intro {
+        background-color: #f5f5f5;
+        border-left: 4px solid #e74c3c;
+        padding: 30px;
+        margin-bottom: 40px;
+        border-radius: 0 4px 4px 0;
+    }
+    
+    .sports-intro p {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+    
+    .sports-intro b {
+        color: #e74c3c;
+    }
+    
+    .sports-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+    
+    .sport-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .sport-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    
+    .sport-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .sport-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .sports-gallery {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .sports-section {
+            padding: 60px 0;
+        }
+        
+        .sports-container {
+            padding: 30px;
+        }
+        
+        .sports-intro {
+            padding: 25px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .sports-section {
+            padding: 40px 0;
+        }
+        
+        .sports-section h2 {
+            font-size: 1.8rem;
+        }
+        
+        .sports-container {
+            padding: 20px;
+        }
+        
+        .sports-gallery {
+            grid-template-columns: 1fr;
+        }
+        
+        .sport-card img {
+            height: 200px;
+        }
+    }
+</style>
 @endpush
 
 @section('content')
-    <div class="bg-light">
-        <div class="container about-section">
-            <h2 class="pt-4 font-weight-bold">Sports</h2>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 alert alert-secondary" style="text-align:justify">
-                <!-- <h3 class="text-center text-warning font-weight-bold">IMPORTANCE OF ART AND CRAFT</h3> -->
-                <p class="pb-3">Sports is an integral part of our curriculum. Students can perform better in Academics by
-                    including sports in their daily routine. Sports keep their mind fresh and add discipline in their life.
-                    It helps to teach students various skills such as leadership, patience, team efforts etc.<br><br>
-                    We, at Vishal International School, organize <b>Early Morning Sports Activities</b> for sports like Football,
-                    Cricket, Netball, Handball, Badminton, Yoga, Skating, Karate etc. to enhance the skills of students and
-                    to keep them physically fit.
-                </p>
+<div class="sports-section">
+    <div class="container">
+        <div class="sports-container">
+            <h2>Sports</h2>
+            
+            <div class="sports-intro">
+                <p>Sports is an integral part of our curriculum. Students can perform better in Academics by including sports in their daily routine. Sports keep their mind fresh and add discipline in their life. It helps to teach students various skills such as leadership, patience, team efforts etc.</p>
+                <p>We, at DUV International School, organize <b>Early Morning Sports Activities</b> for sports like Football, Cricket, Netball, Handball, Badminton, Yoga, Skating, Karate etc. to enhance the skills of students and to keep them physically fit.</p>
             </div>
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/s1.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+            
+            <div class="sports-gallery">
+                <!-- Fixed Images -->
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/s1.jpg') }}" alt="Sports at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/s3.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/s3.jpg') }}" alt="Sports at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/s4.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/s4.jpg') }}" alt="Sports at Vishal International School">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/ft1.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/ft1.jpg') }}" alt="Football at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/ft2.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/ft2.jpg') }}" alt="Football at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/ft3.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/ft3.jpg') }}" alt="Football at Vishal International School">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/ft4.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/ft4.jpg') }}" alt="Football at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/ft5.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/ft5.jpg') }}" alt="Football at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/ft6.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/ft6.jpg') }}" alt="Football at Vishal International School">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/netball-1.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/netball-1.jpg') }}" alt="Netball at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/netball-2.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/netball-2.jpg') }}" alt="Netball at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/netball-3.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/netball-3.jpg') }}" alt="Netball at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/netball-4.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/netball-4.jpg') }}" alt="Netball at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/netball-5.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/netball-5.jpg') }}" alt="Netball at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/netball-6.jpg') }}" class="card-img-top"
-                            alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/netball-6.jpg') }}" alt="Netball at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/v1.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/v1.jpg') }}" alt="Sports at Vishal International School">
                 </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/karate 2.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/karate 2.jpg') }}" alt="Karate at Vishal International School">
                 </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/Karate 1.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/Karate 1.jpg') }}" alt="Karate at Vishal International School">
                 </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/Skating.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/Skating.jpg') }}" alt="Skating at Vishal International School">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset('frontend/images/sport/yoga.jpg') }}" class="card-img-top" alt="Image 1">
-                    </div>
+                <div class="sport-card">
+                    <img src="{{ asset('frontend/images/sport/yoga.jpg') }}" alt="Yoga at Vishal International School">
                 </div>
-                @foreach ($sports as $sport )    
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 alert " style="text-align:justify">
-                    <div class="sport-card card">
-                        <img src="{{ asset($sport->image_path) }}" class="card-img-top" alt="Image 1">
-                    </div>
+                
+                <!-- Dynamic Images from Database -->
+                @foreach ($sports as $sport)
+                <div class="sport-card">
+                    <img src="{{ asset($sport->image_path) }}" alt="Sports activity at Vishal International School">
                 </div>
                 @endforeach
-
             </div>
-
         </div>
     </div>
+</div>
 @endsection

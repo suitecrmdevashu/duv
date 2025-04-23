@@ -73,13 +73,6 @@
           <button type="button" class="btn footer-btn"><a href="{{ route('contactus') }}">Contact Us</a></button>
         </div>
       </div>
-      <!--<div class="container-fluid copyright">-->
-      <!--  <div class="row">-->
-      <!--    <div class="col-md-12 text-center">-->
-      <!--      <p>&copy; 2023 Vishal International School. All rights reserved.</p>-->
-      <!--    </div>-->
-      <!--  </div>-->
-      <!--</div>-->
     </footer>
     
     
