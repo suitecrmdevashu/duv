@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\ChairmanDeskController;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\Notifications;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SchoolOverViewController;
 use App\Http\Controllers\Admin\VisionMissionController;
 use App\Http\Controllers\Frontend\IndexController;
 
@@ -269,5 +270,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/vision&mission', [VisionMissionController::class, 'visionMission']);
         Route::post('/vision&mission/store', [VisionMissionController::class, 'store_visionMission']);
+
+        Route::get('/schoolOverView', [SchoolOverViewController::class, 'schoolOverView']);
+        Route::post('/schoolOverView/store', [SchoolOverViewController::class, 'store_schoolOverView']);
     });
 });

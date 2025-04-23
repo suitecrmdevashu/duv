@@ -96,7 +96,7 @@
 
 
             @php
-            $aboutActive = in_array(Session::get('active'), ['visionMission', 'principal', 'mission']) ? 'menu-is-opening menu-open' : '';
+            $aboutActive = in_array(Session::get('active'), ['visionMission', 'principal', 'mission','schooloverview','chairmandesk']) ? 'menu-is-opening menu-open' : '';
         @endphp
         
             <!-- About Us Menu -->
@@ -109,6 +109,17 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
+                    
+                    @can('schoolOverView')
+                    <li class="nav-item">
+                        <a href="/admin/schoolOverView"
+                            class="nav-link {{ Session::get('active') == 'schooloverview' ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>School Overview</p>
+                        </a>
+                    </li>
+                @endcan
+
                     @can('visionMission')
                         <li class="nav-item">
                             <a href="/admin/vision&mission" class="nav-link {{ Session::get('active') == 'visionMission' ? 'active' : '' }}">
@@ -136,6 +147,8 @@
                             </a>
                         </li>
                     @endcan
+
+                    
                 </ul>
             </li>
 
