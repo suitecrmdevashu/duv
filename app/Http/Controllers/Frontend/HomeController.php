@@ -30,6 +30,7 @@ use Mail;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\SchoolOverview;
 use App\Models\SocialContact;
 use App\Models\VisionMission;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,8 @@ class HomeController extends Controller
 {
     public function aboutschool()
     {
-        return view('frontend.about-school');
+        $data = SchoolOverview::find(1); 
+        return view('frontend.about-school',['data'=>$data]);
     }
 
     public function visionmission(){

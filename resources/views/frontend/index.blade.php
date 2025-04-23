@@ -197,16 +197,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 left-content  mb60 pdt40" data-aos="zoom-in">
                     <h2>WELCOME TO OUR SCHOOL</h2>
                     <p class="text-justify">
-                        DUV International School, has always believed in education that bears greater affinity to a students
-                        life ahead. The founder principal Mrs. P.L. Rana’s inspiration and constant guidance has made the
-                        school a force to reckon with in various fields. Besides academics, the school has done exceedingly
-                        well in various areas like sports, music, performing arts, oratory and a lot more. When a child
-                        comes to us it is his/her very first exposure to the world outside the realm of the family. The
-                        imprints of the first experience give direction to his life later. So, we aim at the overall
-                        development of our students.In the present world of degenerating values, we seek to inculcate good
-                        values which have been producing true human beings who lead our society towards true upliftment. The
-                        aim can only be attained if all possible avenues are explored and utilised to develop the all round
-                        personality of the pupil.</p>
+                        {!! nl2br(strip_tags($schoolOverview->about)) !!}
+                    </p>
 
                     <br>
                     <!-- <a href="#" class="btn btn-default">read more...</a> -->
