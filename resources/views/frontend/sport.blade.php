@@ -138,73 +138,13 @@
             
             <div class="sports-gallery">
                 <!-- Fixed Images -->
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/s1.jpg') }}" alt="Sports at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/s3.jpg') }}" alt="Sports at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/s4.jpg') }}" alt="Sports at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/ft1.jpg') }}" alt="Football at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/ft2.jpg') }}" alt="Football at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/ft3.jpg') }}" alt="Football at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/ft4.jpg') }}" alt="Football at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/ft5.jpg') }}" alt="Football at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/ft6.jpg') }}" alt="Football at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/netball-1.jpg') }}" alt="Netball at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/netball-2.jpg') }}" alt="Netball at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/netball-3.jpg') }}" alt="Netball at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/netball-4.jpg') }}" alt="Netball at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/netball-5.jpg') }}" alt="Netball at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/netball-6.jpg') }}" alt="Netball at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/v1.jpg') }}" alt="Sports at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/karate 2.jpg') }}" alt="Karate at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/Karate 1.jpg') }}" alt="Karate at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/Skating.jpg') }}" alt="Skating at Vishal International School">
-                </div>
-                <div class="sport-card">
-                    <img src="{{ asset('frontend/images/sport/yoga.jpg') }}" alt="Yoga at Vishal International School">
-                </div>
-                
                 <!-- Dynamic Images from Database -->
                 @foreach ($sports as $sport)
                 <div class="sport-card">
-                    <img src="{{ asset($sport->image_path) }}" alt="Sports activity at Vishal International School">
+                    <img src="{{ asset($sport->image_path) }}" alt="Sports activity at DUV International School">
                 </div>
                 @endforeach
+
             </div>
         </div>
     </div>

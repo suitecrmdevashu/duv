@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Scoutimage;
+use Illuminate\Support\Facades\DB;
+
 class ScoutGuideController extends Controller
 {
     public function __construct()
@@ -16,11 +18,12 @@ class ScoutGuideController extends Controller
             return $next($request);
         });
     }
-    
-    public function scout_list(){
+
+    public function scout_list()
+    {
         $banners = Scoutimage::all();
         // dd($banners);
-        return view('admin.scout.list',['banners' => $banners]);
+        return view('admin.scout.list', ['banners' => $banners]);
     }
 
     public function create_scout()
@@ -39,21 +42,21 @@ class ScoutGuideController extends Controller
             'caption.string' => 'The caption must be a string.',
             'caption.max' => 'The caption cannot exceed 255 characters.',
         ];
-    
+
         $validatedData = $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // Maximum size in kilobytes (5MB)
             'caption' => 'required|string|max:255', // Adjust the max length as needed
         ], $customMessages);
-    
-        $imageName = time().'.'.$validatedData['image']->getClientOriginalExtension();
+
+        $imageName = time() . '.' . $validatedData['image']->getClientOriginalExtension();
         $validatedData['image']->move(public_path('frontend-images/scout-&-guide'), $imageName);
         $imagePath = 'frontend-images/scout-&-guide/' . $imageName;
-    
+
         $banner = new Scoutimage(); // Create a new instance of the BannerImage model
         $banner->image_path = $imagePath;
         $banner->caption = $validatedData['caption']; // Assign the caption field
         $banner->save(); // Save the banner image
-    
+
         if ($request->ajax()) {
             return response()->json(['result' => 'success']);
         } else {
@@ -61,13 +64,45 @@ class ScoutGuideController extends Controller
                 ->with('success', 'Image added successfully.');
         }
     }
+
+
+    public function delete_multiple_scout(Request $request)
+    {
+        try {
+            $ids = $request->input('ids');
+
+            if (empty($ids)) {
+                return response()->json([
+                    'result' => 'failure',
+                    'msg' => 'No images selected.'
+                ]);
+            }
+
+            // Delete images
+            DB::transaction(function () use ($ids) {
+                Scoutimage::whereIn('id', $ids)->delete();
+            });
+
+            return response()->json([
+                'result' => 'success',
+                'msg' => 'Selected images have been deleted successfully.'
+            ]);
+        } catch (Exception $e) {
+            app(\App\Exceptions\Handler::class)->report($e);
+            return response()->json([
+                'result' => 'failure',
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function delete_scout(Request $request)
     {
         try {
             $id = $request['id'];
             if (!empty($id)) {
                 $banner = Scoutimage::findOrFail($id);
-                
+
                 $banner->delete();
 
                 $response['result'] = 'success';
@@ -84,5 +119,4 @@ class ScoutGuideController extends Controller
 
         return response()->json($response);
     }
-
 }

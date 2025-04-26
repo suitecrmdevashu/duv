@@ -230,6 +230,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/scout-&-guide/create', [ScoutGuideController::class, 'create_scout'])->name('scout.create');
         Route::post('/scout-&-guide/store', [ScoutGuideController::class, 'store_scout'])->name('scout.store');
         Route::delete('/scout-&-guide/delete/{id}', [ScoutGuideController::class, 'delete_scout'])->name('scout.delete');
+        Route::post('/scout-&-guide/delete-multiple', [ScoutGuideController::class, 'delete_multiple_scout']);
 
         // Scout&guide Routes
         Route::get('/sports', [SportImageController::class, 'sports_list'])->name('sports.list');

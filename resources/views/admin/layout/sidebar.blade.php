@@ -32,6 +32,54 @@
                         </p>
                     </a>
                 </li>
+
+                @php
+                    $active = Session::get('active');
+                    $homePageActive = in_array($active, ['marquee', 'banner','facility']);
+                @endphp
+
+                <li class="nav-item {{ $homePageActive ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ $homePageActive ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-home"></i>
+                        <p>
+                            Home Page
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        @can('create_marquee')
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/marquee/create/1') }}"
+                                    class="nav-link {{ $active === 'marquee' ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Marquee</p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('create_banner')
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/banner') }}"
+                                    class="nav-link {{ $active === 'banner' ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Banner Images</p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('create_facilities')
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/facilities') }}"
+                                    class="nav-link {{ $active === 'facility' ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Facilities</p>
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+
                 {{-- @endcan --}}
                 <li class="nav-item @if (Session::get('active') == 'festivals' ||
                         Session::get('active') == 'calender' ||
@@ -71,7 +119,7 @@
                                 <a href="/admin/festivals" class="nav-link @if (Session::get('active') == 'festivals') active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
-                                        Festival
+                                        Holidays
                                     </p>
                                 </a>
                             </li>
@@ -96,9 +144,17 @@
 
 
             @php
-            $aboutActive = in_array(Session::get('active'), ['visionMission', 'principal', 'mission','schooloverview','chairmandesk']) ? 'menu-is-opening menu-open' : '';
-        @endphp
-        
+                $aboutActive = in_array(Session::get('active'), [
+                    'visionMission',
+                    'principal',
+                    'mission',
+                    'schooloverview',
+                    'chairmandesk',
+                ])
+                    ? 'menu-is-opening menu-open'
+                    : '';
+            @endphp
+
             <!-- About Us Menu -->
             <li class="nav-item {{ $aboutActive }}">
                 <a href="#" class="nav-link {{ $aboutActive ? 'active' : '' }}">
@@ -109,20 +165,21 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    
+
                     @can('schoolOverView')
-                    <li class="nav-item">
-                        <a href="/admin/schoolOverView"
-                            class="nav-link {{ Session::get('active') == 'schooloverview' ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>School Overview</p>
-                        </a>
-                    </li>
-                @endcan
+                        <li class="nav-item">
+                            <a href="/admin/schoolOverView"
+                                class="nav-link {{ Session::get('active') == 'schooloverview' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>School Overview</p>
+                            </a>
+                        </li>
+                    @endcan
 
                     @can('visionMission')
                         <li class="nav-item">
-                            <a href="/admin/vision&mission" class="nav-link {{ Session::get('active') == 'visionMission' ? 'active' : '' }}">
+                            <a href="/admin/vision&mission"
+                                class="nav-link {{ Session::get('active') == 'visionMission' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p> Vision & Mission</p>
                             </a>
@@ -131,7 +188,8 @@
 
                     @can('principal_edit')
                         <li class="nav-item">
-                            <a href="/admin/principal-desk" class="nav-link {{ Session::get('active') == 'principal' ? 'active' : '' }}">
+                            <a href="/admin/principal-desk"
+                                class="nav-link {{ Session::get('active') == 'principal' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p> Principal Desk</p>
                             </a>
@@ -148,7 +206,7 @@
                         </li>
                     @endcan
 
-                    
+
                 </ul>
             </li>
 
@@ -172,20 +230,13 @@
                 </a>
             </li>
 
-            {{-- <li class="nav-item">
-            <a href="/admin/marquee/create/1" class="nav-link @if (Session::get('active') == 'marquee') active @endif">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Marquee 
-              </p>
-            </a>
-          </li> --}}
+
 
             <li class="nav-item">
                 <a href="/admin/social-contact" class="nav-link @if (Session::get('active') == 'socialmedia') active @endif">
                     <i class="nav-icon far fa-plus-square"></i>
                     <p>
-                        Social Media Links
+                        Contact Info
                     </p>
                 </a>
             </li>
@@ -203,7 +254,7 @@
                 <a href="/admin/fee-structure" class="nav-link @if (Session::get('active') == 'fee-structure') active @endif">
                     <i class="nav-icon far fa-plus-square"></i>
                     <p>
-                        Fee Structure
+                        Fee Structure & BUS
                     </p>
                 </a>
             </li>

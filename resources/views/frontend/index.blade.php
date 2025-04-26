@@ -380,7 +380,7 @@
     <script>
         $(document).ready(function() {
 
-            var SITEURL = "https://vishalinternationalschool.com";
+            var SITEURL = "http://schooldemoview.info";
 
             $.ajaxSetup({
                 headers: {
