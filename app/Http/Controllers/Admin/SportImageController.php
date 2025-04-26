@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Sport;
+use Illuminate\Support\Facades\File;
 
 class SportImageController extends Controller
 {
@@ -17,11 +18,12 @@ class SportImageController extends Controller
             return $next($request);
         });
     }
-    
-    public function sports_list(){
+
+    public function sports_list()
+    {
         $banners = Sport::all();
         // dd($banners);
-        return view('admin.sport.list',['banners' => $banners]);
+        return view('admin.sport.list', ['banners' => $banners]);
     }
 
     public function create_sports()
@@ -31,37 +33,47 @@ class SportImageController extends Controller
 
     public function store_sports(Request $request)
     {
-        $customMessages = [
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ], [
             'image.required' => 'Please upload an image.',
-            'image.image' => 'The uploaded file must be an image.',
-            'image.mimes' => 'Supported image formats are jpeg, png, jpg, and gif.',
+            'image.image' => 'Each file must be an image.',
+            'image.mimes' => 'Supported formats: jpeg, png, jpg, gif.',
             'image.max' => 'The image size cannot exceed 5MB.',
-            // 'caption.required' => 'Please provide a caption for the banner.',
-            // 'caption.string' => 'The caption must be a string.',
-            // 'caption.max' => 'The caption cannot exceed 255 characters.',
-        ];
-    
-        $validatedData = $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // Maximum size in kilobytes (5MB)
-            // 'caption' => 'required|string|max:255', // Adjust the max length as needed
-        ], $customMessages);
-    
-        $imageName = time().'.'.$validatedData['image']->getClientOriginalExtension();
-        $validatedData['image']->move(public_path('frontend-images/scout-&-guide'), $imageName);
-        $imagePath = 'frontend-images/scout-&-guide/' . $imageName;
-    
-        $banner = new Sport(); // Create a new instance of the BannerImage model
-        $banner->image_path = $imagePath;
-        // $banner->caption = $validatedData['caption']; // Assign the caption field
-        $banner->save(); // Save the banner image
-    
-        if ($request->ajax()) {
-            return response()->json(['result' => 'success']);
-        } else {
-            return redirect()->route('scout.list')
-                ->with('success', 'Image added successfully.');
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            // Generate unique name
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            // Move to public/frontend-images/sportsImages
+            $destinationPath = public_path('frontend-images/sportsImages');
+
+            // Make sure the directory exists
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true); // create folder if not exist
+            }
+
+            $image->move($destinationPath, $imageName);
+
+            // Save relative path into database
+            $imagePath = 'frontend-images/sportsImages/' . $imageName;
+
+            // Save to DB
+            $sport = new Sport();
+            $sport->image_path = $imagePath;
+            $sport->save();
         }
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('sports.list')
+        ]);
     }
+
+
 
     public function delete_sports(Request $request)
     {
@@ -69,7 +81,9 @@ class SportImageController extends Controller
             $id = $request['id'];
             if (!empty($id)) {
                 $banner = Sport::findOrFail($id);
-                
+                if (File::exists(public_path($banner->image_path))) {
+                    File::delete(public_path($banner->image_path));
+                }
                 $banner->delete();
 
                 $response['result'] = 'success';
@@ -77,6 +91,36 @@ class SportImageController extends Controller
             } else {
                 $response['result'] = 'failure';
                 $response['msg'] = 'Select Image';
+            }
+        } catch (Exception $e) {
+            app(\App\Exceptions\Handler::class)->report($e);
+            $response['result'] = 'failure';
+            $response['msg'] = $e->getMessage();
+        }
+
+        return response()->json($response);
+    }
+
+    public function delete_multiple_sports(Request $request)
+    {
+        try {
+            $ids = $request->ids;
+
+            if (!empty($ids)) {
+                $banners = Sport::whereIn('id', $ids)->get();
+
+                foreach ($banners as $banner) {
+                    if (File::exists(public_path($banner->image_path))) {
+                        File::delete(public_path($banner->image_path));
+                    }
+                    $banner->delete();
+                }
+
+                $response['result'] = 'success';
+                $response['msg'] = 'Selected Images Deleted Successfully';
+            } else {
+                $response['result'] = 'failure';
+                $response['msg'] = 'No images selected.';
             }
         } catch (Exception $e) {
             app(\App\Exceptions\Handler::class)->report($e);

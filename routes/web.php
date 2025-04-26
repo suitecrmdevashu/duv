@@ -237,6 +237,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/sports/create', [SportImageController::class, 'create_sports'])->name('sports.create');
         Route::post('/sports/store', [SportImageController::class, 'store_sports'])->name('sports.store');
         Route::delete('/sports/delete/{id}', [SportImageController::class, 'delete_sports'])->name('sports.delete');
+        Route::post('/sports/delete-multiple', [SportImageController::class, 'delete_multiple_sports']);
 
         Route::controller(CategoryController::class)->group(function () {
             Route::get('/category', 'index')->name('category');
