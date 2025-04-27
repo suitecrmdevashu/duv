@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\SportImageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChairmanDeskController;
 use App\Http\Controllers\Admin\FacilityController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\Notifications;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SchoolOverViewController;
@@ -50,6 +51,7 @@ Route::get('/clear-cache', function () {
 });
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/header', [IndexController::class, 'headerMenu'])->name('headerMenu');
 // {
 //     return view('frontend.index');
 // })->name('home');
@@ -275,5 +277,9 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/schoolOverView', [SchoolOverViewController::class, 'schoolOverView']);
         Route::post('/schoolOverView/store', [SchoolOverViewController::class, 'store_schoolOverView']);
+
+        //menu
+        Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
+        Route::post('/menus/toggle-status', [MenuController::class, 'toggleStatus'])->name('menus.toggle');
     });
 });

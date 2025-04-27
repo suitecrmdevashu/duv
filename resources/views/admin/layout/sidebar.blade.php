@@ -342,6 +342,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="/admin/menus" class="nav-link @if (Session::get('active') == 'menu') active @endif">
+                    <i class="nav-icon fa fa-cog"></i>
+                    <p>
+                        Setting
+                    </p>
+                </a>
+            </li>
+
 
             {{-- @endcan --}}
             {{-- @can('create_unsolditems') --}}
