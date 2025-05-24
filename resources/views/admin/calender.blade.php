@@ -37,7 +37,7 @@
    
     <script>
         $(document).ready(function () {
-            var SITEURL =  "https://vishalinternationalschool.com/admin";
+            var SITEURL =  "http://schooldemoview.info.com/admin";
   
             $.ajaxSetup({
                 headers: {
