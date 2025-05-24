@@ -4,7 +4,7 @@
  </button>
 
 <footer class="main-footer">
-    <strong>Copyright &copy; {{date('Y')}} <a href="#" target="_blank">VIS</a>.</strong>
+    <strong>Copyright &copy; {{date('Y')}} <a href="#" target="_blank">DUV</a>.</strong>
     All Rights Reserved.
     <div class="float-right d-none d-sm-inline-block">
     </div>
